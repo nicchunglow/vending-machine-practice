@@ -20,10 +20,14 @@ class VendingMachine {
     this.moneyWallet.loadCurrencyAllowed();
   }
   insertMoney(money) {
+    if (!(money instanceof Array)) {
+      const err = "Entry failed. Please insert money instead of random stuff";
+      throw new Error(err);
+    }
     try {
+      const listOfMoney = this.moneyWallet.listOfMoney;
       const listOfUsableMoney = [];
       let unusableMoney = [];
-      const listOfMoney = this.moneyWallet.listOfMoney;
       for (let i = 0; i < money.length; i++) {
         if (!listOfMoney.includes(money[i])) {
           unusableMoney.push(money[i]);
@@ -44,8 +48,7 @@ class VendingMachine {
           (AccuAmount, CurrentAmount) => AccuAmount + CurrentAmount
         );
       }
-      return `${this.moneyWallet.currentBalance} has been entered the vending machine.
-      and ${unusableMoney} has been turned.`;
+      return `${this.moneyWallet.currentBalance} has been entered the vending machine and ${unusableMoney} has been turned.`;
     } catch (err) {
       return err;
     }
@@ -58,7 +61,7 @@ module.exports = VendingMachine;
 // console.log(OJMachine.insertMoney([10]));
 // console.log(OJMachine.insertMoney([10, 2, 2]));
 // console.log(OJMachine.insertMoney([10, 14, 67]));
-// console.log(OJMachine.moneyWallet.currentBalance);
+// console.log(OJMachine.insertMoney(['ads']));
 
 // OJMachine.insertMoney([5, 10], [200]);
 

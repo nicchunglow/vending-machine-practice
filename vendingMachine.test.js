@@ -14,17 +14,27 @@ describe("Vending Machine", () => {
     OJMachine.insertMoney([10, 20, 100]);
     expect(OJMachine.moneyWallet.currentBalance).toBe(130);
   });
-  test("should be able to take in notes only", () => {
+  test("should be able to give a response", () => {
     const OJMachine = new VendingMachine();
     OJMachine.initVendingMachine();
-    OJMachine.insertMoney([200, 500, 1000]);
+    const actionTaken = OJMachine.insertMoney([200, 500, 1000]);
     expect(OJMachine.moneyWallet.currentBalance).toBe(1700);
+    expect(actionTaken).toEqual(
+      "1700 has been entered the vending machine and 0 has been turned."
+    );
   });
-  // test("should tell you the current balance entering the vending machine"),
-  //   () => {
-  //     const OJMachine = new VendingMachine();
-  //     OJMachine.initVendingMachine();
-  //     OJMachine.insertMoney([200, 500, 1000]);
-  //     expect().toBe(`hi`);
-  //   };
+  test("should be able to catch error is it not an array", () => {
+    const OJMachine = new VendingMachine();
+    OJMachine.initVendingMachine();
+    expect(() => {
+      OJMachine.insertMoney("string");
+    }).toThrowError(
+      new Error("Entry failed. Please insert money instead of random stuff")
+    );
+  });
+  expect(() => {
+    OJMachine.insertMoney([123]);
+  }).not.toThrowError(
+    new Error("Entry failed. Please insert money instead of random stuff")
+  );
 });
