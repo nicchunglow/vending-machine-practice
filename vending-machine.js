@@ -1,4 +1,4 @@
-class moneyWallet {
+class MoneyWallet {
   constructor() {
     this.coinList = [];
     this.noteList = [];
@@ -12,17 +12,18 @@ class moneyWallet {
   }
 }
 
-class ingredientStorage {
+class IngredientStorage {
   constructor() {
     this.lemons = 0;
     this.water = 0;
     this.ice = 0;
   }
   orderAndFillLemons(amount) {
+    if (amount === 0) {
+      const err = "I TELL U WHAT. PUT LEMONS RIGHT.";
+      throw new Error(err);
+    }
     try {
-      if (!typeof amount === Number || amount === 0) {
-        throw new Error("I TELL U WHAT. PUT MONEY RIGHT.");
-      }
       this.lemons += amount;
       let remainingLemons = 0;
       if (this.lemons > 10) {
@@ -36,14 +37,52 @@ class ingredientStorage {
       return err;
     }
   }
+  orderAndFillWater(amount) {
+    if (amount === 0) {
+      const err = "I TELL U WHAT. PUT WATER RIGHT.";
+      throw new Error(err);
+    }
+    try {
+      this.water += amount;
+      let remainingWater = 0;
+      if (this.water > 100) {
+        remainingWater = this.water - 100;
+        this.water = 100;
+        return `You have filled too much water. Here are ${remainingWater} not filled.`;
+      } else {
+        return `You have filled ${this.water}L.`;
+      }
+    } catch (err) {
+      return err;
+    }
+  }
+  orderAndFillIce(amount) {
+    if (amount === 0) {
+      const err = "I TELL U WHAT. PUT ICE RIGHT.";
+      throw new Error(err);
+    }
+    try {
+      this.ice += amount;
+      let remainingIce = 0;
+      if (this.ice > 50) {
+        remainingIce = this.ice - 50;
+        this.ice = 50;
+        return `You have filled too much ice. Here are ${remainingIce} not filled.`;
+      } else {
+        return `You now have ${this.ice} ice cubes.`;
+      }
+    } catch (err) {
+      return err;
+    }
+  }
 }
 class VendingMachine {
   constructor() {
-    this.moneyWallet = new moneyWallet();
-    this.ingredientStorage = new ingredientStorage();
+    this.MoneyWallet = new MoneyWallet();
+    this.IngredientStorage = new IngredientStorage();
   }
   initVendingMachine() {
-    this.moneyWallet.loadCurrencyAllowed();
+    this.MoneyWallet.loadCurrencyAllowed();
   }
   insertMoney(money) {
     if (!(money instanceof Array)) {
@@ -51,7 +90,7 @@ class VendingMachine {
       throw new Error(err);
     }
     try {
-      const listOfMoney = this.moneyWallet.listOfMoney;
+      const listOfMoney = this.MoneyWallet.listOfMoney;
       const listOfUsableMoney = [];
       let unusableMoney = [];
       for (let i = 0; i < money.length; i++) {
@@ -64,7 +103,7 @@ class VendingMachine {
       const combinedUsableAmount = listOfUsableMoney.reduce(
         (AccuAmount, CurrentAmount) => AccuAmount + CurrentAmount
       );
-      this.moneyWallet.currentBalance += combinedUsableAmount;
+      this.MoneyWallet.currentBalance += combinedUsableAmount;
       if (unusableMoney.length === 0) {
         unusableMoney = 0;
       } else if (unusableMoney.length > 1) {
@@ -74,7 +113,7 @@ class VendingMachine {
           (AccuAmount, CurrentAmount) => AccuAmount + CurrentAmount
         );
       }
-      return `${this.moneyWallet.currentBalance} has been entered the vending machine and ${unusableMoney} has been turned.`;
+      return `${this.MoneyWallet.currentBalance} has been entered the vending machine and ${unusableMoney} has been turned.`;
     } catch (err) {
       return err;
     }
@@ -82,7 +121,9 @@ class VendingMachine {
 }
 module.exports = VendingMachine;
 
+// const OJMachine = new VendingMachine();
 // OJMachine.initVendingMachine();
+// console.log(OJMachine.ingredientStorage.orderAndFillLemons(0));
 // console.log(OJMachine.insertMoney([10]));
 // console.log(OJMachine.insertMoney([10, 2, 2]));
 // console.log(OJMachine.insertMoney([10, 14, 67]));
