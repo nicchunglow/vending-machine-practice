@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 const { expect } = require("@jest/globals");
 const VendingMachine = require("./vending-machine");
+
 describe("Vending Machine", () => {
   test("should take in money", () => {
     const OJMachine = new VendingMachine();
@@ -37,4 +38,24 @@ describe("Vending Machine", () => {
   }).not.toThrowError(
     new Error("Entry failed. Please insert money instead of random stuff")
   );
+});
+
+describe("ingredientStorage", () => {
+  it("should add lemons when ordered", () => {
+    const OJMachine = new VendingMachine();
+    OJMachine.ingredientStorage.orderAndFillLemons(5);
+    expect(OJMachine.ingredientStorage.lemons).toEqual(5);
+  });
+  it("should only take in 10 lemons maximum", () => {
+    const OJMachine = new VendingMachine();
+    const numberOfLemons = 15;
+    const remainingLemons = numberOfLemons - 10;
+    const response = OJMachine.ingredientStorage.orderAndFillLemons(
+      numberOfLemons
+    );
+    expect(OJMachine.ingredientStorage.lemons).toEqual(10);
+    expect(response).toEqual(
+      `You have filled too much lemons. Here are ${remainingLemons} not filled.`
+    );
+  });
 });

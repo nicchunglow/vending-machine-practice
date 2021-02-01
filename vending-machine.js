@@ -12,9 +12,35 @@ class moneyWallet {
   }
 }
 
+class ingredientStorage {
+  constructor() {
+    this.lemons = 0;
+    this.water = 0;
+    this.ice = 0;
+  }
+  orderAndFillLemons(amount) {
+    try {
+      if (!typeof amount === Number || amount === 0) {
+        throw new Error("I TELL U WHAT. PUT MONEY RIGHT.");
+      }
+      this.lemons += amount;
+      let remainingLemons = 0;
+      if (this.lemons > 10) {
+        remainingLemons = this.lemons - 10;
+        this.lemons = 10;
+        return `You have filled too much lemons. Here are ${remainingLemons} not filled.`;
+      } else {
+        return `You have filled ${this.lemons}.`;
+      }
+    } catch (err) {
+      return err;
+    }
+  }
+}
 class VendingMachine {
   constructor() {
     this.moneyWallet = new moneyWallet();
+    this.ingredientStorage = new ingredientStorage();
   }
   initVendingMachine() {
     this.moneyWallet.loadCurrencyAllowed();
@@ -56,7 +82,6 @@ class VendingMachine {
 }
 module.exports = VendingMachine;
 
-// const OJMachine = new VendingMachine();
 // OJMachine.initVendingMachine();
 // console.log(OJMachine.insertMoney([10]));
 // console.log(OJMachine.insertMoney([10, 2, 2]));
