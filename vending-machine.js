@@ -12,12 +12,13 @@ class MoneyWallet {
   }
 }
 
-class IngredientStorage {
+class IngredientMonitoringSystem {
   constructor() {
     this.lemons = 0;
     this.water = 0;
     this.ice = 0;
   }
+
   orderAndFillLemons(amount) {
     if (amount === 0) {
       const err = "I TELL U WHAT. PUT LEMONS RIGHT.";
@@ -79,7 +80,7 @@ class IngredientStorage {
 class VendingMachine {
   constructor() {
     this.MoneyWallet = new MoneyWallet();
-    this.IngredientStorage = new IngredientStorage();
+    this.IngredientMonitoringSystem = new IngredientMonitoringSystem();
   }
   initVendingMachine() {
     this.MoneyWallet.loadCurrencyAllowed();

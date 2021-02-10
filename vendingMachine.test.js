@@ -40,30 +40,30 @@ describe("Vending Machine", () => {
   );
 });
 
-describe("ingredientStorage", () => {
+describe("IngredientMonitoringSystem", () => {
   describe("lemons", () => {
     it("should add lemons when ordered", () => {
       const OJMachine = new VendingMachine();
-      OJMachine.IngredientStorage.orderAndFillLemons(5);
-      expect(OJMachine.IngredientStorage.lemons).toEqual(5);
+      OJMachine.IngredientMonitoringSystem.orderAndFillLemons(5);
+      expect(OJMachine.IngredientMonitoringSystem.lemons).toEqual(5);
     });
     it("should only take in 10 lemons maximum", () => {
       const OJMachine = new VendingMachine();
       const numberOfLemons = 15;
       const remainingLemons = numberOfLemons - 10;
-      const response = OJMachine.IngredientStorage.orderAndFillLemons(
+      const response = OJMachine.IngredientMonitoringSystem.orderAndFillLemons(
         numberOfLemons
       );
-      expect(OJMachine.IngredientStorage.lemons).toEqual(10);
+      expect(OJMachine.IngredientMonitoringSystem.lemons).toEqual(10);
       expect(response).toEqual(
         `You have filled too much lemons. Here are ${remainingLemons} not filled.`
       );
     });
     it("should throw error when it take in 0 lemons", () => {
       const OJMachine = new VendingMachine();
-      expect(OJMachine.IngredientStorage.lemons).toEqual(0);
+      expect(OJMachine.IngredientMonitoringSystem.lemons).toEqual(0);
       expect(() => {
-        OJMachine.IngredientStorage.orderAndFillLemons(0);
+        OJMachine.IngredientMonitoringSystem.orderAndFillLemons(0);
       }).toThrowError(new Error("I TELL U WHAT. PUT LEMONS RIGHT."));
     });
   });
@@ -71,20 +71,20 @@ describe("ingredientStorage", () => {
     it("should add water when ordered", () => {
       const OJMachine = new VendingMachine();
       const amountOfWater = 50;
-      const response = OJMachine.IngredientStorage.orderAndFillWater(
+      const response = OJMachine.IngredientMonitoringSystem.orderAndFillWater(
         amountOfWater
       );
-      expect(OJMachine.IngredientStorage.water).toEqual(50);
+      expect(OJMachine.IngredientMonitoringSystem.water).toEqual(50);
       expect(response).toEqual(`You have filled ${amountOfWater}L.`);
     });
     it("should only take in 100L of water maximum", () => {
       const OJMachine = new VendingMachine();
       const amountOfWater = 150;
       const remainingWater = amountOfWater - 100;
-      const response = OJMachine.IngredientStorage.orderAndFillWater(
+      const response = OJMachine.IngredientMonitoringSystem.orderAndFillWater(
         amountOfWater
       );
-      expect(OJMachine.IngredientStorage.water).toEqual(100);
+      expect(OJMachine.IngredientMonitoringSystem.water).toEqual(100);
       expect(response).toEqual(
         `You have filled too much water. Here are ${remainingWater} not filled.`
       );
@@ -92,24 +92,24 @@ describe("ingredientStorage", () => {
     it("should throw error when it take in 0L of water", () => {
       const OJMachine = new VendingMachine();
       expect(() => {
-        OJMachine.IngredientStorage.orderAndFillWater(0);
+        OJMachine.IngredientMonitoringSystem.orderAndFillWater(0);
       }).toThrowError(new Error("I TELL U WHAT. PUT WATER RIGHT."));
     });
   });
   describe("ice", () => {
-    it("should add ice when ordered", () => {
+    it("should add ice to supply when ordered", () => {
       const OJMachine = new VendingMachine();
       const amountOfIce = 20;
-      const response = OJMachine.IngredientStorage.orderAndFillIce(amountOfIce);
-      expect(OJMachine.IngredientStorage.ice).toEqual(amountOfIce);
+      const response = OJMachine.IngredientMonitoringSystem.orderAndFillIce(amountOfIce);
+      expect(OJMachine.IngredientMonitoringSystem.ice).toEqual(amountOfIce);
       expect(response).toEqual(`You now have ${amountOfIce} ice cubes.`);
     });
     it("should only take in 50 ice cubes maximum", () => {
       const OJMachine = new VendingMachine();
       const amountOfIce = 55;
       const remainingIce = amountOfIce - 50;
-      const response = OJMachine.IngredientStorage.orderAndFillIce(amountOfIce);
-      expect(OJMachine.IngredientStorage.ice).toEqual(50);
+      const response = OJMachine.IngredientMonitoringSystem.orderAndFillIce(amountOfIce);
+      expect(OJMachine.IngredientMonitoringSystem.ice).toEqual(50);
       expect(response).toEqual(
         `You have filled too much ice. Here are ${remainingIce} not filled.`
       );
@@ -117,7 +117,7 @@ describe("ingredientStorage", () => {
     it("should throw error when it take in 0L of water", () => {
       const OJMachine = new VendingMachine();
       expect(() => {
-        OJMachine.IngredientStorage.orderAndFillIce(0);
+        OJMachine.IngredientMonitoringSystem.orderAndFillIce(0);
       }).toThrowError(new Error("I TELL U WHAT. PUT ICE RIGHT."));
     });
   });
