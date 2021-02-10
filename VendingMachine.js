@@ -7,6 +7,9 @@ class VendingMachine {
   }
   initVendingMachine() {
     this.MoneyWallet.loadCurrencyAllowed();
+    this.IngredientMonitoringSystem.orderAndFillIce(10);
+    this.IngredientMonitoringSystem.orderAndFillWater(100);
+    this.IngredientMonitoringSystem.orderAndFillLemons(50);
   }
   insertMoney(money) {
     this.MoneyWallet.moneyChecker(money);
@@ -38,6 +41,12 @@ class VendingMachine {
     } catch (err) {
       return err;
     }
+  }
+  makeJuice() {
+    this.IngredientMonitoringSystem.lemons -= 2;
+    this.IngredientMonitoringSystem.ice -= 10;
+    this.IngredientMonitoringSystem.water -= 20;
+    return 'JUICE'
   }
 }
 module.exports = VendingMachine;

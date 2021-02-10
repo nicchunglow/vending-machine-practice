@@ -32,10 +32,16 @@ describe("Vending Machine", () => {
     }).toThrowError(
       new Error("Entry failed. Please insert money instead of random stuff")
     );
+    expect(() => {
+      OJMachine.insertMoney([123]);
+    }).not.toThrowError(
+      new Error("Entry failed. Please insert money instead of random stuff")
+    );
   });
-  expect(() => {
-    OJMachine.insertMoney([123]);
-  }).not.toThrowError(
-    new Error("Entry failed. Please insert money instead of random stuff")
-  );
+  it("make a drink when there are enough ingredients", () => {
+    const OJMachine = new VendingMachine();
+    OJMachine.initVendingMachine();
+    const juice = OJMachine.makeJuice();
+    expect(juice).toEqual("JUICE");
+  });
 });
