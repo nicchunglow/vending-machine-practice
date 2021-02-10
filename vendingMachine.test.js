@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 const { expect } = require("@jest/globals");
-const VendingMachine = require("./vending-machine");
+const VendingMachine = require("./VendingMachine");
 
 describe("Vending Machine", () => {
   test("should take in money", () => {

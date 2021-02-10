@@ -1,18 +1,5 @@
 const IngredientMonitoringSystem = require("./IngredientMonitoringSystem");
-class MoneyWallet {
-  constructor() {
-    this.coinList = [];
-    this.noteList = [];
-    this.listOfMoney = [];
-    this.currentBalance = 0;
-  }
-  loadCurrencyAllowed() {
-    const coinList = [5, 10, 20, 50, 100];
-    const noteList = [200, 500, 1000];
-    this.listOfMoney = coinList.concat(noteList);
-  }
-}
-
+const MoneyWallet = require("./MoneyWallet");
 class VendingMachine {
   constructor() {
     this.MoneyWallet = new MoneyWallet();
@@ -22,10 +9,7 @@ class VendingMachine {
     this.MoneyWallet.loadCurrencyAllowed();
   }
   insertMoney(money) {
-    if (!(money instanceof Array)) {
-      const err = "Entry failed. Please insert money instead of random stuff";
-      throw new Error(err);
-    }
+    this.MoneyWallet.moneyChecker(money);
     try {
       const listOfMoney = this.MoneyWallet.listOfMoney;
       const listOfUsableMoney = [];
@@ -58,8 +42,8 @@ class VendingMachine {
 }
 module.exports = VendingMachine;
 
-// const OJMachine = new VendingMachine();
-// OJMachine.initVendingMachine();
+const OJMachine = new VendingMachine();
+OJMachine.initVendingMachine();
 // console.log(OJMachine.ingredientStorage.orderAndFillLemons(0));
 // console.log(OJMachine.insertMoney([10]));
 // console.log(OJMachine.insertMoney([10, 2, 2]));
