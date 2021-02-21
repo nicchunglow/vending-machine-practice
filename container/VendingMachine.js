@@ -1,5 +1,5 @@
-const IngredientMonitoringSystem = require("./IngredientMonitoringSystem");
-const MoneyWallet = require("./MoneyWallet");
+const IngredientMonitoringSystem = require("../components/IngredientMonitoringSystem");
+const MoneyWallet = require("../components/MoneyWallet");
 class VendingMachine {
   constructor(fruit) {
     this.MoneyWallet = new MoneyWallet();
