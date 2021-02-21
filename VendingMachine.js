@@ -11,9 +11,6 @@ class VendingMachine {
     this.IngredientMonitoringSystem.orderAndFillWater(100);
     this.IngredientMonitoringSystem.orderAndFillLemons(50);
   }
-  insertMoney(money) {
-    return this.MoneyWallet.addMoney(money);
-  }
   makeJuice() {
     this.IngredientMonitoringSystem.lemons -= 2;
     this.IngredientMonitoringSystem.ice -= 10;
@@ -26,11 +23,5 @@ module.exports = VendingMachine;
 const OJMachine = new VendingMachine();
 OJMachine.initVendingMachine();
 // console.log(OJMachine.ingredientStorage.orderAndFillLemons(0));
-// console.log(OJMachine.insertMoney([10]));
-// console.log(OJMachine.insertMoney([10, 2, 2]));
-// console.log(OJMachine.insertMoney([10, 14, 67]));
-// console.log(OJMachine.insertMoney(['ads']));
-
-// OJMachine.insertMoney([5, 10], [200]);
 
 // console.log(OJMachine.currentBalance);
