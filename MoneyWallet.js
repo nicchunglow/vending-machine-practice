@@ -8,7 +8,7 @@ class MoneyWallet {
     const noteList = [200, 500, 1000];
     this.moneyList = coinList.concat(noteList);
   }
-  moneyChecker(money) {
+  addMoney(money) {
     try {
       const err = "Entry failed. Please insert money instead of random stuff";
       if (!(money instanceof Array)) {

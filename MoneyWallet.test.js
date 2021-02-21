@@ -13,24 +13,24 @@ describe("MoneyWallet", () => {
     const rightAmount = [1000];
     const message =
       "1000 has been entered the vending machine and 0 has been turned.";
-    expect(moneyWallet.moneyChecker(rightAmount)).toEqual(message);
+    expect(moneyWallet.addMoney(rightAmount)).toEqual(message);
   });
   test("should take in money", () => {
     const moneyWallet = new MoneyWallet();
     moneyWallet.loadCurrencyAllowed();
-    moneyWallet.moneyChecker([10, 20, 100, 1000]);
+    moneyWallet.addMoney([10, 20, 100, 1000]);
     expect(moneyWallet.currentBalance).toBe(1130);
   });
   test("should be able to take in coins only", () => {
     const moneyWallet = new MoneyWallet();
     moneyWallet.loadCurrencyAllowed();
-    moneyWallet.moneyChecker([10, 20, 100]);
+    moneyWallet.addMoney([10, 20, 100]);
     expect(moneyWallet.currentBalance).toBe(130);
   });
   test("should be able to give a response", () => {
     const moneyWallet = new MoneyWallet();
     moneyWallet.loadCurrencyAllowed();
-    const actionTaken = moneyWallet.moneyChecker([200, 500, 1000]);
+    const actionTaken = moneyWallet.addMoney([200, 500, 1000]);
     expect(moneyWallet.currentBalance).toBe(1700);
     expect(actionTaken).toEqual(
       "1700 has been entered the vending machine and 0 has been turned."
@@ -40,12 +40,12 @@ describe("MoneyWallet", () => {
     const moneyWallet = new MoneyWallet();
     moneyWallet.loadCurrencyAllowed();
     expect(() => {
-      moneyWallet.moneyChecker("string");
+      moneyWallet.addMoney("string");
     }).toThrowError(
       new Error("Entry failed. Please insert money instead of random stuff")
     );
     expect(() => {
-      moneyWallet.moneyChecker([123]);
+      moneyWallet.addMoney([123]);
     }).not.toThrowError(
       new Error("Entry failed. Please insert money instead of random stuff")
     );
@@ -54,7 +54,7 @@ describe("MoneyWallet", () => {
     const moneyWallet = new MoneyWallet();
     moneyWallet.loadCurrencyAllowed();
     expect(() => {
-      moneyWallet.moneyChecker([10, 20, 100, "hahahaha"]);
+      moneyWallet.addMoney([10, 20, 100, "hahahaha"]);
     }).toThrowError(
       new Error("Entry failed. Please insert money instead of random stuff")
     );

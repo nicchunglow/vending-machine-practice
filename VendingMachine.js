@@ -12,7 +12,7 @@ class VendingMachine {
     this.IngredientMonitoringSystem.orderAndFillLemons(50);
   }
   insertMoney(money) {
-    return this.MoneyWallet.moneyChecker(money);
+    return this.MoneyWallet.addMoney(money);
   }
   makeJuice() {
     this.IngredientMonitoringSystem.lemons -= 2;
