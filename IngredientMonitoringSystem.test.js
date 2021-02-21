@@ -1,30 +1,46 @@
 const IngredientMonitoringSystem = require("./IngredientMonitoringSystem");
 
 describe("IngredientMonitoringSystem", () => {
-  describe("lemons", () => {
-    it("should add lemons when ordered", () => {
-      const ingredientMonitoringSystem = new IngredientMonitoringSystem();
-      ingredientMonitoringSystem.orderAndFillLemons(5);
-      expect(ingredientMonitoringSystem.lemons).toEqual(5);
-    });
-    it("should only take in 10 lemons maximum", () => {
-      const ingredientMonitoringSystem = new IngredientMonitoringSystem();
-      const numberOfLemons = 15;
-      const remainingLemons = numberOfLemons - 10;
-      const response = ingredientMonitoringSystem.orderAndFillLemons(
-        numberOfLemons
-      );
-      expect(ingredientMonitoringSystem.lemons).toEqual(10);
-      expect(response).toEqual(
-        `You have filled too much lemons. Here are ${remainingLemons} not filled.`
-      );
-    });
-    it("should throw error when it take in 0 lemons", () => {
-      const ingredientMonitoringSystem = new IngredientMonitoringSystem();
-      expect(ingredientMonitoringSystem.lemons).toEqual(0);
-      expect(() => {
-        ingredientMonitoringSystem.orderAndFillLemons(0);
-      }).toThrowError(new Error("I TELL U WHAT. PUT LEMONS RIGHT."));
+  describe("fruit", () => {
+    describe("lemons as an example", () => {
+      it("should store what type of fruit this vending machine is for", () => {
+        const ingredientMonitoringSystem = new IngredientMonitoringSystem(
+          "Lemon"
+        );
+        const response = ingredientMonitoringSystem.fruits.type;
+        const answer = "Lemon";
+        expect(response).toBe(answer);
+      });
+      it("should add lemons when ordered", () => {
+        const ingredientMonitoringSystem = new IngredientMonitoringSystem(
+          "Lemon"
+        );
+        ingredientMonitoringSystem.orderAndFillFruitChoice(5);
+        expect(ingredientMonitoringSystem.fruits.amount).toEqual(5);
+      });
+      it("should only take in 10 lemons maximum", () => {
+        const ingredientMonitoringSystem = new IngredientMonitoringSystem(
+          "Lemon"
+        );
+        const numberOfLemons = 15;
+        const remainingLemons = numberOfLemons - 10;
+        const response = ingredientMonitoringSystem.orderAndFillFruitChoice(
+          numberOfLemons
+        );
+        expect(ingredientMonitoringSystem.fruits.amount).toEqual(10);
+        expect(response).toEqual(
+          `You have filled too much lemons. Here are ${remainingLemons} not filled.`
+        );
+      });
+      it("should throw error when it take in 0 lemons", () => {
+        const ingredientMonitoringSystem = new IngredientMonitoringSystem(
+          "Lemon"
+        );
+        expect(ingredientMonitoringSystem.fruits.amount).toEqual(0);
+        expect(() => {
+          ingredientMonitoringSystem.orderAndFillFruitChoice(0);
+        }).toThrowError(new Error(`I TELL U WHAT. PUT LEMONS RIGHT.`));
+      });
     });
   });
   describe("water", () => {

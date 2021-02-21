@@ -1,27 +1,23 @@
 const IngredientMonitoringSystem = require("./IngredientMonitoringSystem");
 const MoneyWallet = require("./MoneyWallet");
 class VendingMachine {
-  constructor() {
+  constructor(fruit) {
     this.MoneyWallet = new MoneyWallet();
-    this.IngredientMonitoringSystem = new IngredientMonitoringSystem();
+    this.IngredientMonitoringSystem = new IngredientMonitoringSystem(fruit);
   }
   initVendingMachine() {
     this.MoneyWallet.loadCurrencyAllowed();
     this.IngredientMonitoringSystem.orderAndFillIce(10);
     this.IngredientMonitoringSystem.orderAndFillWater(100);
-    this.IngredientMonitoringSystem.orderAndFillLemons(50);
+    this.IngredientMonitoringSystem.orderAndFillFruitChoice(50);
   }
   makeJuice() {
-    this.IngredientMonitoringSystem.lemons -= 2;
+    this.IngredientMonitoringSystem.fruits.amount -= 2;
     this.IngredientMonitoringSystem.ice -= 10;
     this.IngredientMonitoringSystem.water -= 20;
-    return "JUICE";
+    const capsFruit = this.IngredientMonitoringSystem.fruits.type.toUpperCase();
+
+    return `${capsFruit} JUICE`;
   }
 }
 module.exports = VendingMachine;
-
-const OJMachine = new VendingMachine();
-OJMachine.initVendingMachine();
-// console.log(OJMachine.ingredientStorage.orderAndFillLemons(0));
-
-// console.log(OJMachine.currentBalance);

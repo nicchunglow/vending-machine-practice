@@ -4,9 +4,20 @@ const VendingMachine = require("./VendingMachine");
 
 describe("Vending Machine", () => {
   it("make a drink when there are enough ingredients", () => {
-    const OJMachine = new VendingMachine();
-    OJMachine.initVendingMachine();
-    const juice = OJMachine.makeJuice();
-    expect(juice).toEqual("JUICE");
+    const LemonJuiceMachine = new VendingMachine("Lemon");
+    LemonJuiceMachine.initVendingMachine();
+    const fruitName = LemonJuiceMachine.IngredientMonitoringSystem.fruits.type;
+    const juice = LemonJuiceMachine.makeJuice();
+    expect(juice).toEqual(`${fruitName.toUpperCase()} JUICE`);
+  });
+  it("should be able to take in two different types of vending machine", () => {
+    const LemonJuiceMachine = new VendingMachine("Lemon");
+    const OrangeJuiceMachine = new VendingMachine("Orange");
+    expect(LemonJuiceMachine.IngredientMonitoringSystem.fruits.type).toBe(
+      "Lemon"
+    );
+    expect(OrangeJuiceMachine.IngredientMonitoringSystem.fruits.type).toBe(
+      "Orange"
+    );
   });
 });
