@@ -1,26 +1,26 @@
 class IngredientMonitoringSystem {
   constructor(fruitChoice) {
-    this.fruits = { type: fruitChoice, amount: 0 };
+    this.fruit = { type: fruitChoice, amount: 0 };
     this.water = 0;
     this.ice = 0;
   }
 
   orderAndFillFruitChoice(amount) {
     if (amount === 0) {
-      const capsFruit = this.fruits.type.toUpperCase() + "S";
+      const capsFruit = this.fruit.type.toUpperCase() + "S";
       const err = `I TELL U WHAT. PUT ${capsFruit} RIGHT.`;
       throw new Error(err);
     }
     try {
-      this.fruits.amount += amount;
+      this.fruit.amount += amount;
       let remainingFruits = 0;
-      if (this.fruits.amount > 10) {
-        remainingFruits = this.fruits.amount - 10;
-        this.fruits.amount = 10;
-        const lowerCaseFruit = this.fruits.type.toLowerCase() + "s";
+      if (this.fruit.amount > 10) {
+        remainingFruits = this.fruit.amount - 10;
+        this.fruit.amount = 10;
+        const lowerCaseFruit = this.fruit.type.toLowerCase() + "s";
         return `You have filled too much ${lowerCaseFruit}. Here are ${remainingFruits} not filled.`;
       } else {
-        return `You have filled ${this.fruits.amount}.`;
+        return `You have filled ${this.fruit.amount}.`;
       }
     } catch (err) {
       return err;

@@ -7,7 +7,7 @@ describe("IngredientMonitoringSystem", () => {
         const ingredientMonitoringSystem = new IngredientMonitoringSystem(
           "Lemon"
         );
-        const response = ingredientMonitoringSystem.fruits.type;
+        const response = ingredientMonitoringSystem.fruit.type;
         const answer = "Lemon";
         expect(response).toBe(answer);
       });
@@ -16,7 +16,7 @@ describe("IngredientMonitoringSystem", () => {
           "Lemon"
         );
         ingredientMonitoringSystem.orderAndFillFruitChoice(5);
-        expect(ingredientMonitoringSystem.fruits.amount).toEqual(5);
+        expect(ingredientMonitoringSystem.fruit.amount).toEqual(5);
       });
       it("should only take in 10 lemons maximum", () => {
         const ingredientMonitoringSystem = new IngredientMonitoringSystem(
@@ -27,7 +27,7 @@ describe("IngredientMonitoringSystem", () => {
         const response = ingredientMonitoringSystem.orderAndFillFruitChoice(
           numberOfLemons
         );
-        expect(ingredientMonitoringSystem.fruits.amount).toEqual(10);
+        expect(ingredientMonitoringSystem.fruit.amount).toEqual(10);
         expect(response).toEqual(
           `You have filled too much lemons. Here are ${remainingLemons} not filled.`
         );
@@ -36,7 +36,7 @@ describe("IngredientMonitoringSystem", () => {
         const ingredientMonitoringSystem = new IngredientMonitoringSystem(
           "Lemon"
         );
-        expect(ingredientMonitoringSystem.fruits.amount).toEqual(0);
+        expect(ingredientMonitoringSystem.fruit.amount).toEqual(0);
         expect(() => {
           ingredientMonitoringSystem.orderAndFillFruitChoice(0);
         }).toThrowError(new Error(`I TELL U WHAT. PUT LEMONS RIGHT.`));

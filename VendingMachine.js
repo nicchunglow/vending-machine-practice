@@ -12,10 +12,10 @@ class VendingMachine {
     this.IngredientMonitoringSystem.orderAndFillFruitChoice(50);
   }
   makeJuice() {
-    this.IngredientMonitoringSystem.fruits.amount -= 2;
+    this.IngredientMonitoringSystem.fruit.amount -= 2;
     this.IngredientMonitoringSystem.ice -= 10;
     this.IngredientMonitoringSystem.water -= 20;
-    const capsFruit = this.IngredientMonitoringSystem.fruits.type.toUpperCase();
+    const capsFruit = this.IngredientMonitoringSystem.fruit.type.toUpperCase();
 
     return `${capsFruit} JUICE`;
   }
