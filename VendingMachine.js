@@ -12,41 +12,13 @@ class VendingMachine {
     this.IngredientMonitoringSystem.orderAndFillLemons(50);
   }
   insertMoney(money) {
-    this.MoneyWallet.moneyChecker(money);
-    try {
-      const listOfMoney = this.MoneyWallet.listOfMoney;
-      const listOfUsableMoney = [];
-      let unusableMoney = [];
-      for (let i = 0; i < money.length; i++) {
-        if (!listOfMoney.includes(money[i])) {
-          unusableMoney.push(money[i]);
-        } else {
-          listOfUsableMoney.push(money[i]);
-        }
-      }
-      const combinedUsableAmount = listOfUsableMoney.reduce(
-        (AccuAmount, CurrentAmount) => AccuAmount + CurrentAmount
-      );
-      this.MoneyWallet.currentBalance += combinedUsableAmount;
-      if (unusableMoney.length === 0) {
-        unusableMoney = 0;
-      } else if (unusableMoney.length > 1) {
-        unusableMoney = unusableMoney[0];
-      } else {
-        unusableMoney.reduce(
-          (AccuAmount, CurrentAmount) => AccuAmount + CurrentAmount
-        );
-      }
-      return `${this.MoneyWallet.currentBalance} has been entered the vending machine and ${unusableMoney} has been turned.`;
-    } catch (err) {
-      return err;
-    }
+    return this.MoneyWallet.moneyChecker(money);
   }
   makeJuice() {
     this.IngredientMonitoringSystem.lemons -= 2;
     this.IngredientMonitoringSystem.ice -= 10;
     this.IngredientMonitoringSystem.water -= 20;
-    return 'JUICE'
+    return "JUICE";
   }
 }
 module.exports = VendingMachine;
